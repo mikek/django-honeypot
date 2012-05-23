@@ -19,11 +19,13 @@ def view_func(request):
 
 class HoneypotTestCase(TestCase):
     def setUp(self):
-        # delattrs here are a required hack until django #10130 is closed
+        # Django ticket #10130 is closed, but it should work even on 1.0 
         if hasattr(settings, 'HONEYPOT_VALUE'):
             delattr(settings._wrapped, 'HONEYPOT_VALUE')
         if hasattr(settings, 'HONEYPOT_VERIFIER'):
             delattr(settings._wrapped, 'HONEYPOT_VERIFIER')
+        if hasattr(settings, 'HONEYPOT_FIELD_IS_OPTIONAL'):
+            delattr(settings._wrapped, 'HONEYPOT_FIELD_IS_OPTIONAL')
         settings.HONEYPOT_FIELD_NAME = 'honeypot'
 
 class VerifyHoneypotValue(HoneypotTestCase):

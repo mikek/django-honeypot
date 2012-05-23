@@ -41,6 +41,8 @@ You will almost always need to define ``HONEYPOT_FIELD_NAME`` which is the name 
 
 ``HONEYPOT_VERIFIER`` is an advanced option that you can specify to validate the honeypot.  The default verifier ensures that the contents of the honeypot field matches ``HONEYPOT_VALUE``.  Using a combination of a callable for ``HONEYPOT_VALUE`` and ``HONEYPOT_VERIFIER`` it is possible to implement a more advanced technique such as using timestamps.
 
+You can set ``HONEYPOT_FIELD_IS_OPTIONAL`` to skip checks on unprotected forms. This way it becomes possible just to use ``HoneypotViewMiddleware`` with ``render_honeypot_field`` template tag to protect some third-party app's URLs/views. It helps in a situation when you can not modify urlconf or decorate a view. This method introduces much less overhead than ``HoneypotResponseMiddleware`` does.
+
 Adding honeypot fields to specific forms and views
 --------------------------------------------------
 
